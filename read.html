@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LearnPY</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #ffffff;
+    }
+
+    /* بەشی ژمارەی پەڕە */
+    .page-number {
+      position: fixed;
+      top: 39px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 18px;
+      font-weight: bold;
+      background: #ffffff;
+      color: #333;
+      padding: 5px 15px;
+      border-radius: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    #noBtn, #yesBtn {
+      font-size: 16px;
+      padding: 10px 20px;
+      margin: 10px;
+      position: absolute;
+    }
+    #yesBtn {
+      left: 500px;
+      top: 250px;
+      background-color: #ffffff;
+    }
+    #noBtn {
+      left: 830px;
+      top: 251px;
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <!-- ژمارەی پەڕە -->
+  <div class="page-number">page-number 1</div>
+
+  <h2>Which do you love each other more?</h2>
+  <button id="yesBtn">He loves me more</button>
+  <button id="noBtn">i love him more</button>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    // شوێنی تصادفی بۆ دوگمەی No
+    function moveNoBtn() {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 50) + 50;
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoBtn);
+
+    // کلیک لە Yes → گواستنەوە بۆ پەڕەی تر
+    yesBtn.addEventListener("click", () => {
+      window.location.href = "read2.html"; // ناوی پەڕەی نوێ لێرە دابنێ
+    });
+  </script>
+</body>
+</html>

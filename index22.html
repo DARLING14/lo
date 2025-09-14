@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Beloved ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff5f5;
+            overflow-x: hidden;
+        }
+        
+        .dancing-font {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-100px) rotate(20deg);
+                opacity: 0.7;
+            }
+        }
+        
+        .password-container {
+            transition: all 0.5s ease;
+        }
+        
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+        }
+        
+        .content {
+            transition: all 0.5s ease 0.3s;
+        }
+        
+        .gallery-item {
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .polaroid {
+            background: white;
+            padding: 1rem 1rem 3rem 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+        
+        .polaroid:nth-child(even) {
+            transform: rotate(2deg);
+        }
+        
+        .polaroid:nth-child(even):hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+    <!-- Password Screen -->
+    <div id="passwordScreen" class="password-container fixed inset-0 flex items-center justify-center bg-pink-50 bg-opacity-90 z-50 p-4">
+        <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full text-center">
+            <div class="text-5xl text-pink-500 mb-6">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-pink-600 mb-2 dancing-font">For Your Eyes Only</h1>
+            <p class="text-gray-600 mb-6">Enter our special password to continue</p>
+            
+            <div class="relative mb-6">
+                <input type="password" id="passwordInput" class="w-full px-4 py-3 rounded-lg border-2 border-pink-300 focus:border-pink-500 focus:outline-none transition" placeholder="Enter password">
+                <button id="showPassword" class="absolute right-3 top-3 text-gray-400 hover:text-pink-500">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+            
+            <button id="submitPassword" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white py-3 rounded-lg font-semibold hover:from-pink-600 hover:to-rose-600 transition shadow-lg hover:shadow-xl mb-4">
+                Unlock My Heart
+            </button>
+            
+            <p id="errorMessage" class="text-red-500 text-sm h-5"></p>
+        </div>
+    </div>
+    
+    <!-- Main Content (Hidden Initially) -->
+    <div id="mainContent" class="content hidden w-full max-w-6xl">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl md:text-6xl font-bold text-pink-600 mb-4 dancing-font">Happy Birthday My Love</h1>
+            <div class="flex justify-center mb-6">
+                <div class="w-24 h-1 bg-pink-400 rounded-full"></div>
+            </div>
+            <p class="text-xl text-gray-700 max-w-2xl mx-auto">To the one who makes my heart skip a beat every single day</p>
+        </header>
+        
+        <!-- Hero Section -->
+        <section class="mb-16 relative overflow-hidden rounded-3xl shadow-xl">
+            <div class="absolute inset-0 bg-gradient-to-r from-pink-500 to-rose-500 opacity-80"></div>
+            <div class="relative z-10 p-8 md:p-16 text-white">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 dancing-font">For My Everything</h2>
+                <p class="text-xl mb-8 max-w-2xl">On your special day, I want you to know how much you mean to me. You're not just my love, you're my best friend, my partner , and my greatest adventure.</p>
+                <button id="playSong" class="bg-white text-pink-600 px-6 py-3 rounded-full font-semibold hover:bg-pink-100 transition flex items-center gap-2">
+                    <i class="fas fa-music"></i> Play Our Song
+                </button>
+                <audio id="birthdaySong" src="mp3.mp3"></audio>
+            </div>
+            <div class="absolute inset-0 flex items-center justify-center opacity-20">
+                <i class="fas fa-heart text-white text-9xl"></i>
+            </div>
+        </section>
+        
+        <!-- Memories Gallery -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-pink-600 mb-8 dancing-font">Our Beautiful Memories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="gallery-item">
+                    <div class="polaroid">
+                        <img src="p2.JPG" alt="Memory 1" class="w-full h-64 object-cover rounded">
+                        <p class="mt-4 text-center text-gray-700"> </p>
+                    </div>
+                </div>
+                
+                <!-- Memory 2 -->
+                <div class="gallery-item">
+                    <div class="polaroid">
+                        <img src="p3.JPG" alt="Memory 2" class="w-full h-64 object-cover rounded">
+                        <p class="mt-4 text-center text-gray-700">The day we first met</p>
+                    </div>
+                </div>
+                
+                <!-- Memory 3 -->
+                <div class="gallery-item">
+                    <div class="polaroid">
+                        <img src="p4.PNG" alt="Memory 3" class="w-full h-64 object-cover rounded">
+                        <p class="mt-4 text-center text-gray-700"> </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+        <!-- Love Letter -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 md:p-12 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-pink-600 mb-8 dancing-font">My Love Letter to You</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p class="mb-4">My Dearest,</p>
+                
+                <p class="mb-4">On this priceless day that marks your arrival into this world, my heart overflows with gratitude to God for blessing me with the most precious gift of my life – you. You are the light that brightens my darkest nights, the warmth that comforts me in the coldest moments, and the love that fills every corner of my heart.</p>
+                
+                <p class="mb-4">With you, every moment feels like a beautiful dream I never want to wake from. Your laughter is the sweetest melody, your smile the loveliest sight, and your embrace the safest place I long to be.</p>
+                
+                <p class="mb-4">Today, with a heart full of love, I wish you all the happiness this world can offer, a year filled with success and peace, and for all your beautiful dreams to come true.</p>
+                
+                <p class="mb-4">Thank you for being yourself – perfectly imperfect, wonderfully unique, and truly irreplaceable. I love you more deeply than words could ever express.</p>
+                
+                <p class="mb-4">Forever and always yours,</p>
+                <p class="dancing-font text-2xl text-pink-600">[Hama jaff]</p>
+            </div>
+        </section>
+        
+        <!-- Countdown to Next Celebration -->
+        <section class="mb-16 text-center">
+            <h2 class="text-3xl font-bold text-pink-600 mb-6 dancing-font">Counting Down to Our Next Special Day</h2>
+            <div class="flex justify-center gap-4">
+                <div class="bg-white p-4 rounded-lg shadow-md w-20">
+                    <div class="text-3xl font-bold text-pink-600" id="days">00</div>
+                    <div class="text-sm text-gray-600">Days</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md w-20">
+                    <div class="text-3xl font-bold text-pink-600" id="hours">00</div>
+                    <div class="text-sm text-gray-600">Hours</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md w-20">
+                    <div class="text-3xl font-bold text-pink-600" id="minutes">00</div>
+                    <div class="text-sm text-gray-600">Minutes</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md w-20">
+                    <div class="text-3xl font-bold text-pink-600" id="seconds">00</div>
+                    <div class="text-sm text-gray-600">Seconds</div>
+                </div>
+            </div>
+           <p class="mt-4 text-gray-600">Time until your next special day</p>
+        </section>
+        
+        <div class="mt-8 flex justify-center">
+  <button id="purpleBtn"
+          class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-lg transition">
+    Some questions
+  </button>
+</div>
+
+        <!-- Footer -->
+        <footer class="text-center py-8 border-t border-pink-200">
+            <p class="text-gray-600 mb-2">Made with <i class="fas fa-heart text-pink-500"></i> for you</p>
+            <p class="text-sm text-gray-500">© <span id="currentYear"></span> </p>
+        </footer>
+    </div>
+    
+    <script>
+        // Password Protection
+        const correctPassword = "7/7/2025"; // Change this to your desired password
+        const passwordScreen = document.getElementById('passwordScreen');
+        const passwordInput = document.getElementById('passwordInput');
+        const submitPassword = document.getElementById('submitPassword');
+        const showPassword = document.getElementById('showPassword');
+        const errorMessage = document.getElementById('errorMessage');
+        const mainContent = document.getElementById('mainContent');
+        
+        submitPassword.addEventListener('click', () => {
+            if(passwordInput.value === correctPassword) {
+                passwordScreen.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+                createHearts();
+            } else {
+                errorMessage.textContent = "You're not in love enough Please try again.";
+                passwordInput.classList.add('border-red-500');
+                setTimeout(() => {
+                    passwordInput.classList.remove('border-red-500');
+                }, 2000);
+            }
+        });
+        
+        // Allow pressing Enter to submit password
+        passwordInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') {
+                submitPassword.click();
+            }
+        });
+        
+        // Toggle password visibility
+        showPassword.addEventListener('click', () => {
+            if(passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                showPassword.innerHTML = '<i class="fas fa-eye-slash"></i>';
+            } else {
+                passwordInput.type = 'password';
+                showPassword.innerHTML = '<i class="fas fa-eye"></i>';
+            }
+        });
+        
+        // Play song
+        const playSong = document.getElementById('playSong');
+        const birthdaySong = document.getElementById('birthdaySong');
+        
+        playSong.addEventListener('click', () => {
+            if(birthdaySong.paused) {
+                birthdaySong.play();
+                playSong.innerHTML = '<i class="fas fa-pause"></i> Pause Song';
+            } else {
+                birthdaySong.pause();
+                playSong.innerHTML = '<i class="fas fa-music"></i> Play Our Song';
+            }
+        });
+        
+   
+        // Countdown timer
+        function updateCountdown() {
+            // Set the date we're counting down to (next birthday - sep 15, 2025)
+            const nextBirthday = new Date("Sep 15, 2026 00:00:00").getTime();
+            
+            const now = new Date().getTime();
+            const distance = nextBirthday - now;
+            
+            // Calculate time remaining
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Stop timer if birthday has arrived
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '');
+        }
+        
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Create floating hearts
+        function createHearts() {
+            const colors = ['text-pink-300', 'text-rose-300', 'text-red-300'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = `heart ${colors[Math.floor(Math.random() * colors.length)]}`;
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDuration = (Math.random() * 6 + 3) + 's';
+                
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 9000);
+            }, 300);
+        }
+        // redirect with the purple button
+const purpleBtn = document.getElementById('purpleBtn');
+if (purpleBtn) {
+  purpleBtn.addEventListener('click', () => {
+    window.location.href = "read.html"; // لێرە ناوی پەڕەکە بنووسە
+  });
+}
+    </script>
+</html>
