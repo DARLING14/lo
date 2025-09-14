@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Notes | Romantic Message Portal</title>
+    <link rel="icon" type="image/x-icon" href="https://static.photos/red/64x64/999">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .romantic-text {
+            font-family: 'Dancing Script', cursive;
+        }
+        .body-text {
+            font-family: 'Raleway', sans-serif;
+        }
+        .heart-pulse {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .message-entry {
+            transition: all 0.4s ease;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-50 to-rose-50 body-text">
+    <!-- Navigation -->
+    <nav class="p-4 sticky top-0 z-10 bg-white/80 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <i data-feather="heart" class="text-rose-500 mr-2"></i>
+                <h1 class="romantic-text text-3xl font-bold text-rose-600">Love Notes</h1>
+            </div>
+            <div class="flex space-x-4">
+                <button id="send-tab" class="px-4 py-2 rounded-lg bg-rose-500 text-white hover:bg-rose-600 transition font-medium">Send Message</button>
+                <button id="history-tab" class="px-4 py-2 rounded-lg border border-rose-400 text-rose-500 hover:bg-rose-50 transition">View History</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center">
+        <div class="container mx-auto px-4 py-20 text-center">
+            <div class="heart-pulse inline-block">
+                <i data-feather="heart" class="w-24 h-24 text-rose-400 mx-auto"></i>
+            </div>
+            <h1 class="romantic-text text-5xl md:text-7xl font-bold text-rose-600 mt-8" data-aos="fade-up">Whisper Sweet Words</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mt-6" data-aos="fade-up" data-aos-delay="150">
+                Capture your affection in heartfelt messages for your beloved to cherish
+            </p>
+            <button id="cta-btn" class="mt-10 px-8 py-4 bg-gradient-to-r from-rose-400 to-pink-500 text-white text-xl rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="300">
+                Send Your First Note
+            </button>
+        </div>
+    </section>
+
+    <!-- Send Message Section -->
+    <section id="send-section" class="hidden min-h-screen pt-16 pb-20 bg-gradient-to-br from-pink-100 to-rose-100">
+        <div class="container mx-auto px-4">
+            <h2 class="romantic-text text-4xl text-center text-rose-600 mb-16" data-aos="fade-up">Create Your Love Note</h2>
+            <div class="max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                <div class="relative bg-white rounded-2xl shadow-lg overflow-hidden p-8">
+                    <div class="absolute -top-4 -right-4">
+                        <i data-feather="heart" class="text-rose-200 w-16 h-16"></i>
+                    </div>
+                    <form id="message-form">
+                        <div class="mb-8">
+                            <label class="block text-pink-700 mb-2 text-lg">To:</label>
+                            <input type="text" id="recipient" class="w-full p-4 border-2 border-rose-100 rounded-xl focus:ring-2 focus:ring-rose-300 focus:border-transparent" placeholder="Your beloved's name" required>
+                        </div>
+                        <div class="mb-8">
+                            <label class="block text-pink-700 mb-2 text-lg">Your Loving Message:</label>
+                            <textarea id="message-text" rows="6" class="w-full p-4 border-2 border-rose-100 rounded-xl focus:ring-2 focus:ring-rose-300 focus:border-transparent" placeholder="Pour your heart out..." required></textarea>
+                        </div>
+                        <div class="flex justify-center pt-4">
+                            <button type="submit" class="px-10 py-4 bg-gradient-to-r from-rose-500 to-pink-600 text-white text-xl rounded-xl shadow-lg transition-all hover:bg-gradient-to-r hover:from-rose-600 hover:to-pink-700 flex items-center">
+                                <i data-feather="send" class="mr-2"></i> Send with Love
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history-section" class="hidden min-h-screen pt-16 pb-20 bg-gradient-to-br from-rose-50 to-pink-100">
+        <div class="container mx-auto px-4">
+            <h2 class="romantic-text text-4xl text-center text-rose-600 mb-16" data-aos="fade-up">Your Love Journey</h2>
+            
+            <div id="no-messages" class="max-w-3xl mx-auto text-center py-20" data-aos="fade-up">
+                <i data-feather="inbox" class="w-24 h-24 text-rose-300 mx-auto mb-8"></i>
+                <h3 class="text-2xl text-gray-600 mb-4">Your love notes collection is empty</h3>
+                <p class="text-gray-500">Send your first heartfelt message to begin your journey</p>
+            </div>
+
+            <div id="messages-container" class="max-w-3xl mx-auto grid gap-6 hidden">
+                <!-- Messages will be loaded dynamically by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Toast -->
+    <div id="success-toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-white px-6 py-4 rounded-xl shadow-lg border-l-4 border-green-500 flex items-center hidden" data-aos="fade-up">
+        <i data-feather="check-circle" class="text-green-500 mr-3"></i>
+        <span class="text-gray-700">Message sent with love!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center mb-6">
+                <i data-feather="heart" class="text-rose-400 mx-2"></i>
+                <i data-feather="heart" class="text-rose-300 mx-2"></i>
+                <i data-feather="heart" class="text-rose-200 mx-2"></i>
+            </div>
+            <p class="text-gray-600">Made with love • Forever yours</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize libraries when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+            AOS.init();
+            
+            // Set up navigation tabs
+            const sections = {
+                hero: document.getElementById('hero'),
+                send: document.getElementById('send-section'),
+                history: document.getElementById('history-section')
+            };
+            
+            function switchSection(sectionName) {
+                Object.keys(sections).forEach(key => {
+                    sections[key].classList.add('hidden');
+                });
+                sections[sectionName].classList.remove('hidden');
+            }
+            
+            document.getElementById('cta-btn').addEventListener('click', () => {
+                switchSection('send');
+                window.scrollTo(0, 0);
+            });
+            
+            document.getElementById('send-tab').addEventListener('click', () => {
+                switchSection('send');
+                window.scrollTo(0, 0);
+            });
+            
+            document.getElementById('history-tab').addEventListener('click', () => {
+                switchSection('history');
+                window.scrollTo(0, 0);
+                loadMessages();
+            });
+            
+            // Message form handling
+            const messageForm = document.getElementById('message-form');
+            messageForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const recipient = document.getElementById('recipient').value;
+                const messageText = document.getElementById('message-text').value;
+                const timestamp = new Date().toISOString();
+                
+                // Create message object
+                const message = {
+                    id: Date.now(),
+                    recipient: recipient,
+                    text: messageText,
+                    time: new Date().toLocaleString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric', 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                    })
+                };
+                
+                // Save to localStorage
+                saveMessage(message);
+                
+                // Show success toast
+                const toast = document.getElementById('success-toast');
+                toast.classList.remove('hidden');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 3000);
+                
+                // Reset form
+                messageForm.reset();
+                
+                // Gentle form animation
+                document.getElementById('message-form').animate(
+                    [
+                        { transform: 'translateY(0)' },
+                        { transform: 'translateY(-10px)' },
+                        { transform: 'translateY(0)' }
+                    ],
+                    {
+                        duration: 400,
+                        easing: 'ease-out'
+                    }
+                );
+            });
+            
+            // Load messages from localStorage for history section
+            function loadMessages() {
+                const container = document.getElementById('messages-container');
+                const noMessageDiv = document.getElementById('no-messages');
+                container.innerHTML = '';
+                
+                const messages = getSavedMessages();
+                if (messages.length === 0) {
+                    noMessageDiv.classList.remove('hidden');
+                    container.classList.add('hidden');
+                    return;
+                }
+                
+                noMessageDiv.classList.add('hidden');
+                container.classList.remove('hidden');
+                
+                // Sort messages by id (newest first)
+                messages.sort((a, b) => b.id - a.id);
+                
+                messages.forEach(msg => {
+                    const messageCard = document.createElement('div');
+                    messageCard.className = 'message-entry bg-white rounded-xl shadow-lg overflow-hidden';
+                    messageCard.dataset.aos = 'fade-up';
+                    
+                    messageCard.innerHTML = `
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-lg font-medium text-rose-600">To: ${msg.recipient}</h3>
+                                <span class="text-gray-400 text-sm">${msg.time}</span>
+                            </div>
+                            <p class="text-gray-700 whitespace-pre-line text-lg">${msg.text}</p>
+                        </div>
+                        <div class="bg-pink-50 px-6 py-3 flex justify-between items-center">
+                            <span class="text-rose-400 text-sm">Saved in your heart</span>
+                            <button class="delete-btn" data-id="${msg.id}">
+                                <i data-feather="trash-2" class="text-rose-400 hover:text-rose-600"></i>
+                            </button>
+                        </div>
+                    `;
+                    
+                    container.appendChild(messageCard);
+                    
+                    // Add event for delete button
+                    messageCard.querySelector('.delete-btn').addEventListener('click', function() {
+                        deleteMessage(this.dataset.id);
+                        this.closest('.message-entry').classList.add('opacity-0', 'transform', 'scale-95');
+                        setTimeout(() => {
+                            loadMessages();
+                        }, 300);
+                    });
+                });
+                
+                feather.replace(); // Re-render icons after adding new ones
+            }
+            
+            // LocalStorage helper functions
+            function saveMessage(message) {
+                const messages = getSavedMessages();
+                messages.push(message);
+                localStorage.setItem('loveNotes', JSON.stringify(messages));
+            }
+            
+            function getSavedMessages() {
+                return JSON.parse(localStorage.getItem('loveNotes')) || [];
+            }
+            
+            function deleteMessage(id) {
+                let messages = getSavedMessages();
+                messages = messages.filter(msg => msg.id != id);
+                localStorage.setItem('loveNotes', JSON.stringify(messages));
+            }
+        });
+    </script>
+</body>
+</html>
