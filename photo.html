@@ -120,7 +120,14 @@
 </head>
 <body class="min-h-screen pixel-bg flex flex-col items-center justify-center p-4">
     <!-- Flash effect -->
+
     <div class="flash-effect" id="flash"></div>
+     <div class="fixed bottom-2 left-1/2 transform -translate-x-1/2 z-50">
+    <button id="purpleBtn" class="bg- dark blue-600 hover:bg- black-70 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+        back to note
+    </button>
+</div>
+
 
     <!-- Counter -->
     <div class="counter" id="counter">3</div>
@@ -420,21 +427,17 @@
                     }
                 });
             }
-            document.getElementById('purpleBtn').addEventListener('click', () => {
-    window.location.href = 'photo.html'; // گۆڕە بۆ ناوی پەڕەیەکی تر
-});
+
             // Trigger download
             const link = document.createElement('a');
             link.download = 'pixel-photo-booth-' + new Date().toISOString().slice(0, 10) + '.png';
             link.href = canvas.toDataURL('image/png');
             link.click();
-        });
-         <div class="fixed bottom-2 left-1/2 transform -translate-x-1/2 z-50">
-        <button id="purpleBtn" class="bg- dark blue-600 hover:bg- black-70 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
-            Next
-            
-        </button>
-    </div>
+        }); 
+    
+document.getElementById('purpleBtn').addEventListener('click', () => {
+    window.location.href = 'lovenote.html'; // گۆڕە بۆ پەڕەی تر
+});
 
     </script>
     
